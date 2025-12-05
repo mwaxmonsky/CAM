@@ -4731,7 +4731,6 @@ end subroutine clubb_init_cnst
       ! Output variables
       pblh      = pblh(:ncol),                               &
       wstar     = dummy2(:ncol),                             &
-      bge       = dummy3(:ncol),                             &
       errmsg    = errmsg,                                    &
       errflg    = errflg)
 

@@ -28,8 +28,8 @@
 
 [submodule "atmos_phys"]
 	path = src/atmos_phys
-	url = https://github.com/ESCOMP/atmospheric_physics
-	fxtag = atmos_phys0_19_000
+	url = https://github.com/mwaxmonsky/atmospheric_physics
+	fxtag = 709c990f44da13004ebccc195053495649597c46
         fxrequired = AlwaysRequired
         fxDONOTUSEurl = https://github.com/ESCOMP/atmospheric_physics
 
@@ -130,8 +130,8 @@ fxDONOTUSEurl = https://github.com/ESCOMP/mizuRoute
 
 [submodule "ccs_config"]
 path = ccs_config
-url = https://github.com/ESMCI/ccs_config_cesm.git
-fxtag = ccs_config_cesm1.0.65
+url = https://github.com/mwaxmonsky/ccs_config_cesm.git
+fxtag = a4653374a8b8e859a1de414d79317d714d62ab1f
 fxrequired = ToplevelRequired
 fxDONOTUSEurl = https://github.com/ESMCI/ccs_config_cesm.git
 

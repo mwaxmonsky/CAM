@@ -575,6 +575,7 @@ subroutine compute_eddy_diff( pbuf, lchnk  ,                                    
 
   logical,          parameter :: use_kvf        =  .false.      ! .true. (.false.) : initialize kvh/kvm =  kvf ( 0. )
   real(r8),         parameter :: lambda         =   0.5_r8      ! Under-relaxation factor ( 0 < lambda =< 1 )
+  real(r8),         parameter :: minimum_eddy_flux_coefficient = 0.01_r8 ! CCM1 2.f.14
 
   ! ---------- !
   ! Initialize !
@@ -636,7 +637,7 @@ subroutine compute_eddy_diff( pbuf, lchnk  ,                                    
         kvf(:ncol,:) = 0.0_r8
         do k = ntop_eddy, nbot_eddy-1
            do i = 1, ncol
-              kvf(i,k+1) = calc_eddy_flux_coefficient(ml2(k), ri(i, k), s2(i, k))
+              kvf(i,k+1) = max(calc_eddy_flux_coefficient(ml2(k), ri(i, k), s2(i, k)), minimum_eddy_flux_coefficient)
            end do
         end do
      else

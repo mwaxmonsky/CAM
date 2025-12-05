@@ -370,7 +370,6 @@ subroutine vertical_diffusion_init(pbuf2d)
       pverp   = pverp, &
       karman  = karman, &
       pref_mid = pref_mid, &
-      is_hbr_pbl_scheme = (eddy_scheme .eq. 'HBR'), &
       ntop_turb_in = ntop_eddy, &
       errmsg = errmsg, &
       errflg = errflg)
@@ -390,7 +389,6 @@ subroutine vertical_diffusion_init(pbuf2d)
       pverp   = pverp, &
       karman  = karman, &
       pref_mid = pref_mid, &
-      is_hbr_pbl_scheme = (eddy_scheme .eq. 'HBR'), &
       ntop_turb_in = ntop_eddy, &
       errmsg = errmsg, &
       errflg = errflg)
@@ -869,7 +867,6 @@ subroutine vertical_diffusion_tend( &
   real(r8) :: s2(pcols,pver)  ! shear squared (HB output) [s-2]
   real(r8) :: thv(pcols,pver) ! virtual potential temperature [K]
   real(r8) :: wstar(pcols)    ! convective scale velocity [m s-1]
-  real(r8) :: bge(pcols)      ! buoyancy gradient enhancement
   real(r8) :: q_wv_cflx(pcols)! water vapor surface upward flux for kinematic wv fluxes
 
   ! Temporaries for CCPP-ized diffusion solver
@@ -1151,7 +1148,6 @@ subroutine vertical_diffusion_tend( &
      !REMOVECAM - no longer need this when CAM is retired and pcols no longer exists
      pblh(:) = 0._r8
      wstar(:) = 0._r8
-     bge(:) = 0._r8
      !REMOVECAM_END
      call hb_pbl_dependent_coefficients_run( &
        ncol      = ncol,                                      &
@@ -1171,7 +1167,6 @@ subroutine vertical_diffusion_tend( &
        ! Output variables
        pblh      = pblh(:ncol),                               &
        wstar     = wstar(:ncol),                              &
-       bge       = bge(:ncol),                                &
        errmsg    = errmsg,                                    &
        errflg    = errflg)
 
@@ -1196,7 +1191,6 @@ subroutine vertical_diffusion_tend( &
        karman    = karman,                                    &
        cpair     = cpair,                                     &
        z         = state%zm(:ncol,:pver),                     &
-       is_hbr_pbl_scheme = (eddy_scheme .eq. 'HBR'),          &
        ! Input from hb_pbl_independent_coefficients
        kqfs      = kqfs(:ncol),                               &
        khfs      = khfs(:ncol),                               &
@@ -1208,7 +1202,6 @@ subroutine vertical_diffusion_tend( &
        ! Input from hb_pbl_dependent_coefficients
        pblh      = pblh(:ncol),                               &
        wstar     = wstar(:ncol),                              &
-       bge       = bge(:ncol),                                &
        ! Output variables
        kvm       = kvm(:ncol,:pverp),                         &
        kvh       = kvh(:ncol,:pverp),                         &
